@@ -33,7 +33,7 @@ export default function useMasterLayout(InputComponent, currentUser) {
 							<ul className="navbar-nav mr-auto"></ul>
 							<div className="form-inline my-2 my-lg-0">
 								<span className="mr-4">Welcome {currentUser.userName}</span>
-								<button onClick={this.handleLogOut}>
+								<button type="button" className="btn btn-sm btn-primary" onClick={this.handleLogOut}>
 									Logout
 								</button>
 							</div>
