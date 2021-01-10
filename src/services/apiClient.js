@@ -12,7 +12,6 @@ async function get(route, defaultResult, params) {
     },
   });
 
-  console.log(response);
   if (response.ok) return response.data;
 
   return defaultResult;
