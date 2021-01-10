@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "react-bootstrap";
 import NewTransaction from "./newTransaction";
 import transactionsApi from "../services/transactionsApi";
 

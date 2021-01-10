@@ -12,4 +12,6 @@ function deleteAuthToken() {
 	localStorage.removeItem(tokenKey);
 }
 
-export default { getAuthToken, setAuthToken, deleteAuthToken };
+var authTokenObj = { getAuthToken, setAuthToken, deleteAuthToken }
+
+export default authTokenObj;

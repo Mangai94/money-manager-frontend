@@ -19,7 +19,8 @@ async function getDaywiseTransactions() {
 	return await client.get("transactions", [], {});
 }
 
-export default {
+const clientEndpoints = {
 	addNewTransaction,
 	getDaywiseTransactions,
 };
+export default clientEndpoints;

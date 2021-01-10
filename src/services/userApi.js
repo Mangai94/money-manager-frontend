@@ -31,7 +31,7 @@ async function loginUser(userName, password) {
 		},
 		""
 	);
-	if (!token || token.length == 0) return false;
+	if (!token || token.length === 0) return false;
 
 	keyStore.setAuthToken(token);
 
