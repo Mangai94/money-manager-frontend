@@ -1,0 +1,19 @@
+[
+	{
+		"date": "2021-01-07",
+		"totalIncome": "1000",
+		"totalExpense": 0,
+		"tramsactions": [
+			{
+				"type": "Income",
+				"amount": "1000",
+				"division": null,
+				"category": "Salary",
+				"description": "sal",
+				"date": "2021-01-07",
+				"user": "vigneshkennedy@gmail.com",
+				"id": 1
+			}
+		]
+	}
+]

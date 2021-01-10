@@ -8,65 +8,52 @@ import * as user from "./services/userApi";
 import useMasterLayout from "./components/masterLayout";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
-import DummyScreen from "./components/dummyScreen";
 
 function App() {
-  const [isAuthorized, setIsAuthorized] = useState(false);
-  const [initializing, setInitializing] = useState(true);
-  const HomeScreenWithMaster = useMasterLayout(HomeScreen);
-  const DummyScreenWithMaster = useMasterLayout(DummyScreen);
+	const [isAuthorized, setIsAuthorized] = useState(false);
+	const [currentUser, setCurrentUser] = useState(null);
+	const [initializing, setInitializing] = useState(true);
+	const HomeScreenWithMaster = useMasterLayout(HomeScreen, currentUser);
 
-  useEffect(() => {
-    loadData();
-  }, []);
+	useEffect(() => {
+		loadData();
+	}, []);
 
-  const loadData = async () => {
-    const isAuthorized = await user.isAuthorized();
+	const loadData = async () => {
+		const userDetails = await user.isAuthorized();
 
-    setIsAuthorized(isAuthorized);
-    setInitializing(false);
-  };
+		setIsAuthorized(userDetails !== null && userDetails !== undefined);
+		setCurrentUser(userDetails);
+		setInitializing(false);
+	};
 
-  const protectScreen = (targetComponent) => {
-    if (isAuthorized) return targetComponent;
-    return <Redirect to="/login" />;
-  };
+	const protectScreen = targetComponent => {
+		if (isAuthorized) return targetComponent;
+		return <Redirect to="/login" />;
+	};
 
-  const protectLoginScreen = (targetComponent) => {
-    if (isAuthorized) return <Redirect to="/" />;
-    return targetComponent;
-  };
+	const protectLoginScreen = targetComponent => {
+		if (isAuthorized) return <Redirect to="/" />;
+		return targetComponent;
+	};
 
-  if (initializing)
-    return (
-      <div>
-        <p>Loading ...</p>
-      </div>
-    );
+	if (initializing)
+		return (
+			<div>
+				<p>Loading ...</p>
+			</div>
+		);
 
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route
-          path="/login"
-          render={() => protectLoginScreen(<LoginScreen />)}
-        />
-        <Route
-          path="/register"
-          render={(props) => protectLoginScreen(<RegisterScreen {...props} />)}
-        />
-        <Route
-          path="/dummy"
-          render={() => protectScreen(<DummyScreenWithMaster />)}
-        />
-        <Route
-          path="/"
-          render={() => protectScreen(<HomeScreenWithMaster />)}
-        />
-        <Redirect to="/" />
-      </Switch>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<Switch>
+				<Route path="/login" render={() => protectLoginScreen(<LoginScreen />)} />
+				<Route path="/register" render={props => protectLoginScreen(<RegisterScreen {...props} />)} />
+				<Route path="/" render={() => protectScreen(<HomeScreenWithMaster />)} />
+				<Redirect to="/" />
+			</Switch>
+		</BrowserRouter>
+	);
 }
 
 export default App;
