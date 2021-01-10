@@ -1,7 +1,7 @@
 import { create } from "apisauce";
 import keyStore from "./keyStore";
 const apiClient = create({
-  baseURL: "http://localhost:3000/api/",
+  baseURL: "https://moneymanagerbackend.herokuapp.com/api/",
 });
 
 async function get(route, defaultResult, params) {
